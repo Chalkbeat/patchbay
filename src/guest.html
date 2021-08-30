@@ -1,0 +1,23 @@
+<!doctype html>
+<style>
+html, body {
+  background: salmon;
+}
+</style>
+<h1>GUEST PAGE</h1>
+<pre class="output"></pre>
+<script type="module">
+  import { Sidechain } from "https://unpkg.com/@nprapps/sidechain";
+  Sidechain.registerGuest();
+
+  var here = new URL(window.location);
+  var listing = [];
+  for (var [param, value] of here.searchParams) {
+    var v = decodeURIComponent(value);
+    listing.push(`${param}: '${v}'`);
+  }
+  document.querySelector(".output").innerHTML = `
+RECIEVED FROM PARENT:
+${listing.join("\n")}
+  `
+</script>
