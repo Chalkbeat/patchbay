@@ -6,28 +6,17 @@
   </head>
   <body>
 
-    <h1>HOST PAGE</h1>
+    <img class="logo" src="./assets/logo_lines.png" alt="">
+    <h1>
+      Sidechain
+    </h1>
 
-    <p id="first" data-sidechain="./guest.html?test=parameter%20from%20host"></p>
-    <script src="loader.js" async defer></script>
+    <main>
+      <%= t.renderMarkdown(`
 
-    <p id="second" data-sidechain="./guest.html?test=secondary%20embed"></p>
-    <script src="loader.js" async defer></script>
-
-    <!-- test loading the script again -->
-    <script>
-setTimeout(function() {
-
-  var div = document.createElement("div");
-  div.innerHTML = `
-<p id="async" data-pym-loader data-child-src="./guest.html?test=async%20addition"></p>
-  `
-  document.body.appendChild(div);
-
-  var script = document.createElement("script");
-  script.src = "loader.js";
-  document.body.appendChild(script);
-}, 2000);
-    </script>
+${t.include("sidechain.md")}
+      `) %>
+    </main>
+    
   </body>
 </html>

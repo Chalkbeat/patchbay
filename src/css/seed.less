@@ -1,1 +1,44 @@
 @import "base";
+
+main {
+  padding: 16px;
+  margin: auto;
+  max-width: 800px;
+
+  @media @mobile {
+    font-size: 20px;
+  }
+}
+
+.logo {
+  max-width: 100px;
+  margin: 20px auto;
+  display: block;
+}
+
+h1 {
+  font-size: 48px;
+  text-align: center;
+}
+
+h2, h3, h4 {
+  font-weight: normal;
+  .knockout();
+  text-transform: uppercase;
+  color: #333;
+}
+
+p code {
+  font-weight: bold;
+}
+
+pre {
+  background: #F8F8F8;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+
+h4 {
+  margin-bottom: 0;
+}
