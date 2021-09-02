@@ -15,9 +15,9 @@
   "scripts": {
     "src/js/main.js": "build/loader.js"
   },
-  "title": "",
-  "description": "",
-  "url": "",
+  "title": "Sidechain",
+  "description": "Modern responsive iframes built as custom elements",
+  "url": "https://apps.npr.org/sidechain/",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
