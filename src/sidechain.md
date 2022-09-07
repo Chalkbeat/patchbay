@@ -30,10 +30,11 @@ Sidechain.registerGuest()
 
 ## Sidechain loader
 
-If you've used Pym's [loader script](http://blog.apps.npr.org/pym.js/#loader), there is a similar loader for Sidechain that adds URL parameters from the host page, as well as compatibility with historical Pym embed codes. You can bring in the loader with:
+If you've used Pym's [loader script](http://blog.apps.npr.org/pym.js/#loader), there is a similar loader for Sidechain that adds URL parameters from the host page, as well as compatibility with historical Pym embed codes. You can insert an embed with the loader using:
 
 ```
-<script src="https://apps.npr.org/sidechain/loader.js"></script>
+<side-chain src="EMBED_URL_HERE"></side-chain>
+<script src="https://projects.chalkbeat.org/sidechain/loader.js"></script>
 ```
 
 The URL parameters added to embeds for tracking are:
@@ -43,7 +44,7 @@ The URL parameters added to embeds for tracking are:
 * `initialWidth` - the width of the embed at the time that the loader ran
 * `id` - the ID for the embed
 
-The loader script will enable standard `<side-chain>` elements, but it will also upgrade any elements with the `data-pym-loader` attribute, such as the default embed codes from [our Dailygraphics Rig](https://github.com/nprapps/dailygraphics-next).
+The loader script will enable standard `<side-chain>` elements, but it will also upgrade any elements with the `data-pym-loader` attribute, such as the default embed codes from [the NPR Dailygraphics Rig](https://github.com/nprapps/dailygraphics-next).
 
 However, if you've been using the loader script because of CMS features like PJAX or JavaScript bundling, it may be worth checking to see if the regular Sidechain script is sufficient for your purposes, since the custom elements API handles many of the initialization issues that were problematic in the past.
 
@@ -52,14 +53,14 @@ However, if you've been using the loader script because of CMS features like PJA
 When sending messages between windows, you'll probably want to set a flag value that lets you filter and respond only to messages from your particular application. Setting the `sentinel` attribute on the host, or the same option when initializing a guest, will automatically add that value to messages sent between windows.
 
 ```html
-<side-chain src="..." sentinel="npr"></side-chain>
+<side-chain src="..." sentinel="chalkbeat"></side-chain>
 <script>
   var host = document.querySelector("side-chain");
   host.sendMessage({ type: "analytics", onscreen: "10s" });
   /*
   The actual message will look like:
     {
-      sentinel: "npr",
+      sentinel: "chalkbeat",
       type: "analytics",
       onscreen: "10s"
     }
@@ -77,11 +78,11 @@ On the receiving end, it can be tedious to write the sentinel checks in every me
 
 ```javascript
 var pattern = {
-  sentinel: "npr",
+  sentinel: "chalkbeat",
   type: "analytics"
 };
 var onNPR = Sidechain.matchMessage(pattern, function(data) {
-  console.log("NPR analytics received!", data);
+  console.log("Analytics received!", data);
 });
 window.addEventListener("message", onNPR);
 ```
@@ -149,35 +150,35 @@ The object returned by `Sidechain.registerGuest()` includes the following utilit
 // the sentinel serves as a way to test on the other side
 var host = document.querySelector("side-chain.individual");
 host.sendMessage({
-  sentinel: "npr",
+  sentinel: "chalkbeat",
   type: "log",
-  message: "Hello from NPR"
+  message: "Hello from Chalkbeat"
 });
 
 // receiving a message in the child
 // use matchMessage to automatically filter based on a pattern object
-var nprMatcher = Sidechain.matchMessage({ sentinel: "npr" }, function(data) {
+var messageMatcher = Sidechain.matchMessage({ sentinel: "chalkbeat" }, function(data) {
   switch (data.type) {
     case "log":
-      console.log(data.message); // Hello from NPR
+      console.log(data.message); // Hello from Chalkbeat
       break;
 
     default:
       console.warn(`Sidechain message with unknown type (${data.type}) received`);
   }
 });
-window.addEventListener("message", nprMatcher);
+window.addEventListener("message", messageMatcher);
 
 // sending a message back up to the parent from a child
 var guest = Sidechain.registerGuest();
 guest.sendMessage({
-  sentinel: "npr",
+  sentinel: "chalkbeat",
   type: "broadcast",
   value: "Hello from the guest!"
 });
 
 // re-broadcasting to all instances from the host page
-var broadcastPattern = { sentinel: "npr", type: "broadcast" };
+var broadcastPattern = { sentinel: "chalkbeat", type: "broadcast" };
 window.addEventListener("message", Sidechain.matchMessage(broadcastPattern, function(data) {
   // broadcast the message back to all guest pages
   var hosts = document.querySelectorAll("side-chain");
@@ -216,7 +217,7 @@ a.href = window.parent.location.href.replace(/#.*$/, "") + "#scroll-host";
 a.click();
 ```
 
-> Note that `window.parent.location` is only available from an iframe if the two pages share a domain. If your guest page is on a subdomain, you can set `document.domain` to match (for example, from "apps.npr.org", we can set `document.domain = "npr.org"`). Otherwise, you'll need to know the host URL ahead of time or pass it in through the embed URL.
+> Note that `window.parent.location` is only available from an iframe if the two pages share a domain. If your guest page is on a subdomain, you can set `document.domain` to match (for example, from "projects.chalkbeat.org", we can set `document.domain = "chalkbeat.org"`). Otherwise, you'll need to know the host URL ahead of time or pass it in through the embed URL.
 
 **Does Sidechain provide arbitrary messaging support?**
 

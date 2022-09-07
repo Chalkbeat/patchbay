@@ -1,5 +1,10 @@
 @import "base";
 
+html, body {
+  background: #333;
+  color: white;
+}
+
 main {
   padding: 16px;
   margin: auto;
@@ -19,13 +24,14 @@ main {
 h1 {
   font-size: 48px;
   text-align: center;
+  color: white;
 }
 
 h2, h3, h4 {
   font-weight: normal;
-  .knockout();
+  font-family: @sans;
   text-transform: uppercase;
-  color: #333;
+  color: white;
 }
 
 p code {
@@ -34,6 +40,7 @@ p code {
 
 pre {
   background: #F8F8F8;
+  color: #222;
   padding: 16px;
   overflow-y: auto;
 }

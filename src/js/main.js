@@ -29,6 +29,7 @@ var init = function() {
     var params = {
       loader: true,
       initialWidth: embed.offsetWidth,
+      windowHeight: window.innerHeight,
       id: embed.id,
       parentTitle: encodeURIComponent(document.title),
       parentUrl: encodeURIComponent(window.location.href)
@@ -41,7 +42,6 @@ var init = function() {
     embed.setAttribute("src", updated);
   });
 };
-
 
 window.addEventListener("DOMContentLoaded", init);
 init();
