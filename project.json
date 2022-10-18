@@ -13,7 +13,8 @@
     "src/css/seed.less": "build/style.css"
   },
   "scripts": {
-    "src/js/main.js": "build/loader.js"
+    "src/js/main.js": "build/loader.js",
+    "src/js/demo.js": "build/app.js"
   },
   "title": "Sidechain",
   "description": "Modern responsive iframes built as custom elements",
