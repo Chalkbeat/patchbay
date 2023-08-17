@@ -1,15 +1,10 @@
 var $ = require("./lib/qsa");
+require("./copy-box.js");
 
 var input = $.one("#embed-url");
-var codeElement = $.one(".interactive-embed code");
-var code = codeElement.innerHTML;
+var codeElement = $.one("copy-box");
+var code = codeElement.value;
 
 input.addEventListener("input", function() {
-  codeElement.innerHTML = code.replace("EMBED_URL_HERE", input.value || "EMBED_URL_HERE");
+  codeElement.value = code.replace("EMBED_URL_HERE", input.value || "EMBED_URL_HERE");
 });
-
-codeElement.addEventListener("click", function(e) {
-  var text = codeElement.innerHTML.trim().replace(/&lt;/gi, "<").replace(/&gt;/gi, ">");
-  console.log(text);
-  navigator.clipboard.writeText(text);
-})

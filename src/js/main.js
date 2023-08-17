@@ -1,5 +1,5 @@
 var $ = require("./lib/qsa");
-require("@nprapps/sidechain");
+import("@nprapps/sidechain/src/index.js");
 
 var init = function() {
   // replace marked paragraphs with side-chain elements

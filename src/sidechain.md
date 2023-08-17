@@ -34,14 +34,17 @@ If you've used Pym's [loader script](http://blog.apps.npr.org/pym.js/#loader), t
 
 <div class="interactive-embed">
 
-```
-<side-chain src="EMBED_URL_HERE"></side-chain>
-<script src="https://projects.chalkbeat.org/sidechain/loader.js"></script>
-```
 
 <label for="embed-url">Set custom embed URL:</label>
 <input id="embed-url" value="EMBED_URL_HERE">
 </div>
+
+<copy-box>
+  <template>
+<side-chain src="EMBED_URL_HERE"></side-chain>
+<script src="https://projects.chalkbeat.org/sidechain/loader.js"></script>
+  </template>
+</copy-box>
 
 The URL parameters added to embeds for tracking are:
 
