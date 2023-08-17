@@ -7,7 +7,6 @@ check for existing data to merge--it does a fresh pull every time.
 */
 
 var project = require("../project.json");
-var async = require("async");
 var os = require("os");
 var path = require("path");
 var { google } = require("googleapis");
@@ -119,7 +118,7 @@ module.exports = function(grunt) {
             out.push(obj);
           }
         }
-        var filename = `data/${sheet.properties.title.replace(/\s+/g, "_")}.sheet.json`;
+        var filename = `data/${sheet.properties.title.replace(/[\s\/]+/g, "_")}.sheet.json`;
         console.log(`Saving sheet to ${filename}`);
         grunt.file.write(filename, JSON.stringify(out, null, 2));
       });

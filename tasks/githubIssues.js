@@ -1,6 +1,6 @@
 // creates default issues in the GitHub repo
 var https = require("https");
-var csv = require("csv");
+var csv = require("csv-parse");
 
 module.exports = function(grunt) {
 
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         host: url.host,
         path: url.pathname,
         headers: {
-          "User-Agent": "NPR Interactive Template"
+          "User-Agent": "Chalkbeat Interactive Template"
         },
         auth
       };

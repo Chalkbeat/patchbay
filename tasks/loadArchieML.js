@@ -1,8 +1,6 @@
 /*
-
 Process text files as ArchieML
 Anything that has a .txt extension in /data will be loaded
-
 */
 
 var path = require("path");
