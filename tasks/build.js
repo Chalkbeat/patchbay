@@ -64,7 +64,7 @@ module.exports = function(grunt) {
   };
 
   grunt.template.renderMarkdown = function(input) {
-    var parsed = reader.parse(typogr.typogrify(input));
+    var parsed = reader.parse(input);
 
     var walker = parsed.walker();
     //merge text nodes together

@@ -14,7 +14,8 @@
   },
   "scripts": {
     "src/js/main.js": "build/loader.js",
-    "src/js/demo.js": "build/app.js"
+    "src/js/demo.js": "build/app.js",
+    "src/js/sidechain.js": "build/sidechain.js"
   },
   "title": "Sidechain",
   "description": "Modern responsive iframes built as custom elements",

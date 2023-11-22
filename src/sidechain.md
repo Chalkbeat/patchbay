@@ -18,13 +18,13 @@ By default, Sidechain supports all browsers shipping the Custom Elements and Sha
 
 Embedding a guest page with Sidechain requires two steps. First, on the host page, include the element with a `src` attribute pointing toward the page you want to embed:
 
-```html
+```
 <side-chain src="guest-page.html"></side-chain>
 ```
 
 Then, in your guest page, register it as a guest to start automatically sending height updates to the host:
 
-```javascript
+```
 Sidechain.registerGuest()
 ```
 
@@ -61,7 +61,7 @@ However, if you've been using the loader script because of CMS features like PJA
 
 When sending messages between windows, you'll probably want to set a flag value that lets you filter and respond only to messages from your particular application. Setting the `sentinel` attribute on the host, or the same option when initializing a guest, will automatically add that value to messages sent between windows.
 
-```html
+```
 <side-chain src="..." sentinel="chalkbeat"></side-chain>
 <script>
   var host = document.querySelector("side-chain");
@@ -85,7 +85,7 @@ When sending messages between windows, you'll probably want to set a flag value 
 
 On the receiving end, it can be tedious to write the sentinel checks in every message handler, so Sidechain includes a simple static method named `matchMessage` that accepts a pattern object and a callback, and returns a function that you can use as the window's message handler. The callback will be executed only if the pattern matches, and will receive the message data as its argument. For example, to match an NPR sentinel and a specific "type" value in the data, you could write your code like so:
 
-```javascript
+```
 var pattern = {
   sentinel: "chalkbeat",
   type: "analytics"
@@ -102,7 +102,7 @@ Pattern objects are matched shallowly using strict equality for any keys provide
 
 If using Sidechain in a mixed Pym/Sidechain environment, you may want your guest page to be able to listen to Pym events. For example, you might have visibility analytics on the host side that the guest should dispatch to GA. Sidechain guests include an `on()` method that's similar to Pym's `onMessage()` listeners, and will specifically handle Pym-formatted messages only.
 
-```javascript
+```
 var guest = Sidechain.registerGuest();
 guest.on("on-screen", function(bucket) {
   analytics.track("on-screen", bucket);
@@ -154,7 +154,7 @@ The object returned by `Sidechain.registerGuest()` includes the following utilit
 
 ## Code snippets
 
-```javascript
+```
 // sending a message to an individual child
 // the sentinel serves as a way to test on the other side
 var host = document.querySelector("side-chain.individual");
@@ -219,7 +219,7 @@ guest.on("on-screen", function(bucket) {
 
 > If targeting an ID, you can use the same trick of `target="_parent"` from a link, but you'll need to make sure to explicitly provide the fully qualified URL of the host page (only providing the hash will cause the window to navigate to your guest page). For example, the following code will scroll the host page to the "#scroll-host" ID.
 
-```javascript
+```
 var a = document.createElement("a");
 a.target = "_parent";
 a.href = window.parent.location.href.replace(/#.*$/, "") + "#scroll-host";
